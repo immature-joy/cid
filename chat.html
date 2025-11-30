@@ -9,7 +9,14 @@
 <script>
 tailwind.config = {
     darkMode: 'class',
-    theme: { extend: { colors: { primary: '#6366f1', secondary: '#a855f7' } } }
+    theme: {
+        extend: {
+            colors: {
+                primary: '#6366f1',
+                secondary: '#a855f7'
+            }
+        }
+    }
 }
 </script>
 
@@ -31,7 +38,7 @@ body {
     flex-direction: column;
     max-width: 400px;
     width: 90%;
-    height: 600px;
+    max-height: 80vh;
     border-radius: 20px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.05);
@@ -69,7 +76,8 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255,255,255,0.2);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: 0.3s;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
 }
 
 .message.user {
@@ -97,7 +105,6 @@ body {
     border: none;
     color: white;
     outline: none;
-    border-radius: 0;
 }
 
 .chat-input button {
@@ -112,6 +119,10 @@ body {
 
 .chat-input button:hover {
     background: rgba(168,85,247,0.8);
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
 }
 
 ::-webkit-scrollbar {
@@ -146,22 +157,25 @@ function addMessage(sender, text) {
     div.className = `message ${sender}`;
     div.textContent = text;
     chatMessages.appendChild(div);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: 'smooth' });
 }
 
 async function sendMessage() {
-    if(sending) return;
+    if (sending) return;
     const msg = userMsgInput.value.trim();
-    if(!msg) return;
+    if (!msg) return;
     sending = true;
+    sendBtn.disabled = true;
+
     addMessage('user', msg);
     userMsgInput.value = '';
+    userMsgInput.focus();
 
     const loadingDiv = document.createElement('div');
     loadingDiv.className = 'message bot';
     loadingDiv.textContent = '...';
     chatMessages.appendChild(loadingDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    chatMessages.scrollTo({ top: chatMessages.scrollHeight, behavior: 'smooth' });
 
     try {
         const res = await fetch(`https://simsimi.cyberbot.top/?text=${encodeURIComponent(msg)}`);
@@ -172,11 +186,12 @@ async function sendMessage() {
         console.error(err);
     } finally {
         sending = false;
+        sendBtn.disabled = false;
     }
 }
 
 sendBtn.addEventListener('click', sendMessage);
-userMsgInput.addEventListener('keypress', (e) => {
+userMsgInput.addEventListener('keypress', e => {
     if(e.key === 'Enter') sendMessage();
 });
 </script>
