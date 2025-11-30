@@ -21,6 +21,7 @@ tailwind.config = {
 </script>
 
 <style>
+/* Base */
 body {
     margin: 0;
     height: 100vh;
@@ -28,12 +29,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url('https://i.postimg.cc/2yzZmtfq/background.jpg') center/cover no-repeat;
-    background-color: #111;
+    background-color: #1e1e2f; /* darker but slightly brighter than pure black */
     color: white;
 }
 
-/* Chat container with enhanced glass */
+/* Chat container */
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -42,8 +42,8 @@ body {
     max-height: 90vh;
     border-radius: 20px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(25px) saturate(200%);
+    background: rgba(255, 255, 255, 0.15); /* brighter glass */
+    backdrop-filter: blur(30px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 60px rgba(255,255,255,0.05);
     position: relative;
@@ -55,13 +55,13 @@ body {
     box-shadow: 0 15px 50px rgba(0,0,0,0.5), 0 0 80px rgba(255,255,255,0.08);
 }
 
-/* Header with glass */
+/* Header */
 .chat-header {
     padding: 1rem;
     font-weight: bold;
     text-align: center;
     font-size: 1.25rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(25px) saturate(180%);
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
 }
@@ -84,22 +84,22 @@ body {
     border-radius: 20px;
     word-break: break-word;
     backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     opacity: 0;
     animation: fadeIn 0.3s forwards;
 }
 
 .message.user {
     align-self: flex-end;
-    background: rgba(99,102,241,0.3);
+    background: rgba(99,102,241,0.35);
     border-color: rgba(99,102,241,0.5);
 }
 
 .message.bot {
     align-self: flex-start;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.35);
     border-color: rgba(255,255,255,0.2);
 }
 
@@ -110,8 +110,8 @@ body {
     width: 100%;
     display: flex;
     border-top: 1px solid rgba(255,255,255,0.25);
-    backdrop-filter: blur(20px) saturate(180%);
-    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(25px) saturate(180%);
+    background: rgba(0,0,0,0.25);
     padding: 0.5rem;
     box-sizing: border-box;
 }
@@ -119,7 +119,7 @@ body {
 .chat-input input {
     flex: 1;
     padding: 0.8rem;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.12);
     border: none;
     color: white;
     border-radius: 15px;
@@ -129,7 +129,7 @@ body {
 .chat-input button {
     margin-left: 0.5rem;
     padding: 0.8rem 1rem;
-    background: rgba(168,85,247,0.6);
+    background: rgba(168,85,247,0.65);
     border: none;
     cursor: pointer;
     color: white;
@@ -137,7 +137,7 @@ body {
     transition: 0.2s;
 }
 .chat-input button:hover {
-    background: rgba(168,85,247,0.8);
+    background: rgba(168,85,247,0.85);
 }
 
 /* Animations */
@@ -197,7 +197,6 @@ async function sendMessage() {
     loadingDiv.className = 'message bot';
     chatMessages.appendChild(loadingDiv);
 
-    // Typing animation with fading dots
     let dots = 0;
     const typingInterval = setInterval(() => {
         dots = (dots + 1) % 4;
