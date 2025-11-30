@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shadow Chat | Cid Kageno</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        darkMode: 'class',
+        theme: { extend: { colors: { primary: '#6366f1', secondary: '#a855f7' } } }
+    }
+</script>
+<style>
+body { background: #111; color: white; font-family: sans-serif; }
+.chat-container { display: flex; flex-direction: column; max-width: 600px; margin: auto; height: 100vh; border: 1px solid #333; border-radius: 12px; overflow: hidden; }
+.chat-header { background: #a855f7; padding: 1rem; font-weight: bold; text-align: center; }
+.chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+.message { max-width: 70%; padding: 0.5rem 1rem; border-radius: 1rem; word-break: break-word; }
+.message.user { align-self: flex-end; background: #6366f1; }
+.message.bot { align-self: flex-start; background: #333; }
+.chat-input { display: flex; border-top: 1px solid #333; }
+.chat-input input { flex: 1; padding: 0.8rem; background: #222; border: none; color: white; outline: none; }
+.chat-input button { padding: 0.8rem 1rem; background: #a855f7; border: none; cursor: pointer; color: white; }
+</style>
+</head>
+<body class="dark">
+
+<div class="chat-container">
+    <div class="chat-header">ShadowGPT</div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-input">
+        <input type="text" id="user-msg" placeholder="Type a message..." />
+        <button id="send-btn">Send</button>
+    </div>
+</div>
+
+<script>
+const chatMessages = document.getElementById('chat-messages');
+const userMsgInput = document.getElementById('user-msg');
+const sendBtn = document.getElementById('send-btn');
+
+function addMessage(sender, text) {
+    const div = document.createElement('div');
+    div.className = `message ${sender}`;
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function sendMessage() {
+    const msg = userMsgInput.value.trim();
+    if(!msg) return;
+    addMessage('user', msg);
+    userMsgInput.value='';
+
+    const loadingDiv = document.createElement('div');
+    loadingDiv.className = 'message bot';
+    loadingDiv.textContent = '...';
+    chatMessages.appendChild(loadingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+        const res = await fetch(`https://noobs-api.top/dipto?text=${encodeURIComponent(msg)}`);
+        const data = await res.json();
+        loadingDiv.textContent = data.result || 'No response';
+    } catch(err) {
+        loadingDiv.textContent = 'Error: Unable to reach API';
+    }
+}
+
+sendBtn.addEventListener('click', sendMessage);
+userMsgInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') sendMessage(); });
+</script>
+
+</body>
+</html>
