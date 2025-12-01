@@ -140,11 +140,9 @@ tailwind.config = {
       My <span class="text-purple-500">Tools</span>
     </h2>
 
-    <!-- Tools Scroll Container -->
     <div class="tools-scroll scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 flex gap-6 overflow-x-auto scroll-smooth px-4">
       <!-- Rimini -->
-      <a href="rimini.html" target="_blank" aria-label="Open Rimini Tool"
-         class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
+      <a href="rimini.html" target="_blank" class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl"></div>
         <img src="https://img.icons8.com/color/96/upscaler.png" alt="Rimini" class="mx-auto mb-4 rounded-full">
         <h3 class="font-medium text-white text-lg mb-2">Rimini</h3>
@@ -152,8 +150,7 @@ tailwind.config = {
       </a>
 
       <!-- Nano Banana -->
-      <a href="nano-banana.html" target="_blank" aria-label="Open Nano Banana Tool"
-         class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
+      <a href="nano-banana.html" target="_blank" class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl"></div>
         <img src="https://img.icons8.com/color/96/banana.png" alt="Nano Banana" class="mx-auto mb-4 rounded-full">
         <h3 class="font-medium text-white text-lg mb-2">Nano Banana</h3>
@@ -161,8 +158,7 @@ tailwind.config = {
       </a>
 
       <!-- Face Swap -->
-      <a href="face-swap.html" target="_blank" aria-label="Open Face Swap Tool"
-         class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
+      <a href="face-swap.html" target="_blank" class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl"></div>
         <img src="https://img.icons8.com/color/96/face-id.png" alt="Face Swap" class="mx-auto mb-4 rounded-full">
         <h3 class="font-medium text-white text-lg mb-2">Face Swap</h3>
@@ -170,8 +166,7 @@ tailwind.config = {
       </a>
 
       <!-- Other Tool -->
-      <a href="other-tool.html" target="_blank" aria-label="Open Other Tool"
-         class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
+      <a href="other-tool.html" target="_blank" class="glass min-w-[180px] p-6 rounded-2xl border border-white/15 text-center relative overflow-hidden group" data-aos="fade-right">
         <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 opacity-0 group-hover:opacity-50 transition-opacity rounded-2xl"></div>
         <img src="https://img.icons8.com/color/96/toolbox.png" alt="Other Tool" class="mx-auto mb-4 rounded-full">
         <h3 class="font-medium text-white text-lg mb-2">Other Tool</h3>
@@ -211,6 +206,7 @@ tailwind.config = {
           <p class="text-gray-400">Learning (Student)</p>
         </div>
       </div>
+
       <!-- Skills Panel -->
       <div class="relative" data-aos="fade-left" data-aos-delay="500">
         <div class="glass p-6 md:p-8 rounded-2xl border border-white/15">
@@ -243,6 +239,7 @@ tailwind.config = {
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
@@ -322,4 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
     class CustomFooter extends HTMLElement {
         connectedCallback() {
             this.innerHTML = `
-            <footer class="text-center p-6 bg-black/20 backdrop-blur-md text
+            <footer class="text-center p-6 bg-black/20 backdrop-blur-md text-gray-400 mt-12">
+                &copy; 2025 Cid Kageno. All rights reserved.
+            </footer>`;
+        }
+    }
+    customElements.define('
